@@ -1,0 +1,119 @@
+@import "~susy/sass/susy";
+@include border-box-sizing;
+$susy: ( global-box-sizing: border-box, use-custom: (rem: true));
+$landscape: 544px;
+$tablet: 768px;
+$desktop: 944px;
+%clearfix {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(1.0);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+.container {
+    @include container(80em);
+    @extend %clearfix;
+}
+
+.col {
+    border: 1px solid black;
+    margin-bottom: gutter(12);
+    padding: 16px;
+    @include susy-breakpoint($landscape) {
+        padding: 24px;
+    }
+    @include susy-breakpoint($landscape) {
+        &.default {
+            min-height: 350px;
+        }
+        &.small {
+            min-height: 150px;
+        }
+    }
+    &.animate {
+        animation: scale 250ms ease-in-out;
+    }
+}
+
+.row {
+    @extend %clearfix;
+}
+
+.col-header {
+    height: 122px;
+    @include susy-breakpoint($landscape) {
+        height: 148px;
+    }
+    background-color: yellow;
+}
+
+.col-body {
+    background-color: green;
+}
+
+.default {
+    @include span(12 of 12);
+    @include susy-breakpoint($landscape) {
+        @include span(6 of 12);
+    }
+    @include susy-breakpoint($desktop) {
+        @include span(4 of 12);
+    }
+    @extend %clearfix;
+    .col-icon {
+        @include span(1 of 4 first);
+    }
+    .col-content {
+        @include span(3 of 4 last);
+    }
+}
+
+.half {
+    @include span(12 of 12);
+    @include susy-breakpoint($landscape) {
+        @include span(6 of 12);
+    }
+    .col-icon {
+        @include span(1 of 6 first);
+    }
+    .col-content {
+        @include span(5 of 6 last);
+    }
+}
+
+.full {
+    @include span(12 of 12);
+    .col-icon {
+        @include span(1 of 12 first);
+    }
+    .col-content {
+        @include span(11 of 12 last);
+    }
+}
+
+.half-height {
+    display: table;
+    >div {
+        display: table-row;
+        height: 50%;
+    }
+}
+
+.first {
+    @include first();
+}
+
+.last {
+    @include last();
+}
